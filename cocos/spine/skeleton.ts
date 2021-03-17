@@ -891,11 +891,14 @@ export class Skeleton extends Renderable2D {
      * 返回一个 {{#crossLinkModule "sp.spine"}}sp.spine{{/crossLinkModule}}.Skin 对象。
      *
      * @method setSkin
-     * @param {String} skinName
+     * @param {String|spine.Skin} skinName
      */
-    public setSkin (skinName: string) {
+    public setSkin (skinName: string|spine.Skin) {
         if (this._skeleton) {
-            this._skeleton.setSkinByName(skinName);
+            if(typeof skinName === "string")
+                this._skeleton.setSkinByName(skinName);
+            else
+                this._skeleton.setSkin(skinName);
             this._skeleton.setSlotsToSetupPose();
         }
         this.invalidAnimationCache();
